@@ -52,11 +52,11 @@ while True:
                 writer.writerow([value])
 	print(str(con)+" "+str(value))
 	k.append(value)
-	if len(k)>=120 and g ==0:
+	if len(k)>=30 and g ==0:
 		sref=st.mode(k)
 		g=1
 		k=[]
-	elif len(k)>=120:
+	elif len(k)>=30:
 		with open('ca.csv','a') as csvfile:
                 	writer = csv.writer(csvfile)
                 	writer.writerow([sref])
@@ -65,10 +65,19 @@ while True:
 		pre=st.mode(k)
 		print("Present mode value is "+str(pre)+" Previous mode is "+str(sref))
 		k=[]
-		if abs(sref-pre)>=100:
-			print("Mood is deviated to a little extent....CHEER UP")
-		elif abs(sref-pre)>=200:
-			print("What happend...why soo SAD??")
-        		print("Playing song specially for you")
+		value= abs(sref-pre)
+		if value>=100 and value<150:
+			print("Getting disturbed?")
+			print("Relax stay calm, deviate your thought")
+        	elif value>=150 and value<200:
+			print("Lost in thougts")
+			print("Music lover?")
+			print("Song specially for you")
+			os.system('./music.sh')
+        	elif value>=200:
+			print("why so sad")
+			print("share your pain")
+			mes="John is not feeling well, his sensor reads "+str(value)
+			emergency.group(["doctor@gmail.com"],mes,"Patient alert")	
     time.sleep(0.5)
 
